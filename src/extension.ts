@@ -113,7 +113,7 @@ async function retrieveLocalAtlasMapPort(): Promise<string> {
 		return undefined;
 	}
 
-	updateConfigValueIfNeeded(config, portConfigKey, portFromSettings,port);
+	updateConfigValueIfNeeded(config, portConfigKey, portFromSettings, port);
 	
 	return port;
 }
