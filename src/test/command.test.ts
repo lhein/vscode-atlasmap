@@ -22,7 +22,7 @@ describe("AtlasMap/Commands", function() {
 		sandbox = sinon.createSandbox();
 		executeCommandSpy = sinon.spy(vscode.commands, "executeCommand");
 		showInformationMessageSpy = sinon.spy(vscode.window, "showInformationMessage");
-		await vscode.commands.executeCommand("atlasmap.start");
+		await vscode.commands.executeCommand("atlasmap.startAndOpen");
 		await new Promise(resolve => setTimeout(resolve, 15000));
 	});
 
@@ -36,7 +36,7 @@ describe("AtlasMap/Commands", function() {
 	
 		it("test command execution", async function() {
 			// atlasmap has been started in the setup of the test suite already - just check the call count and determine the port
-			expect(executeCommandSpy.withArgs("atlasmap.start").calledOnce, "AtlasMap start command was not issued").to.be.true;
+			expect(executeCommandSpy.withArgs("atlasmap.startAndOpen").calledOnce, "AtlasMap start command was not issued").to.be.true;
 			port = determineUsedPort();
 			expect(port, "Unable to determine used port for AtlasMap server").to.not.be.undefined;
 			expect(port, "Port for AtlasMap server seems to be NaN").to.not.be.NaN;
@@ -46,14 +46,14 @@ describe("AtlasMap/Commands", function() {
 			expect(port, "Port is not set by previously running test").to.not.be.undefined;
 			expect(port, "Port for AtlasMap server seems to be NaN").to.not.be.NaN;
 
-			await vscode.commands.executeCommand("atlasmap.start");
+			await vscode.commands.executeCommand("atlasmap.startAndOpen");
 
-			expect(executeCommandSpy.withArgs("atlasmap.start").callCount, "AtlasMap start command was not issued").to.be.greaterThan(1);
+			expect(executeCommandSpy.withArgs("atlasmap.startAndOpen").callCount, "AtlasMap start command was not issued").to.be.greaterThan(1);
 			expect(showInformationMessageSpy.getCalls()[showInformationMessageSpy.callCount-1].args[0], "No detection message for running instance found!").to.equal("Running AtlasMap instance found at port " + port);
 
-			await vscode.commands.executeCommand("atlasmap.start");
+			await vscode.commands.executeCommand("atlasmap.startAndOpen");
 
-			expect(executeCommandSpy.withArgs("atlasmap.start").callCount, "AtlasMap start command was not issued").to.be.greaterThan(2);
+			expect(executeCommandSpy.withArgs("atlasmap.startAndOpen").callCount, "AtlasMap start command was not issued").to.be.greaterThan(2);
 			expect(showInformationMessageSpy.getCalls()[showInformationMessageSpy.callCount-1].args[0], "No detection message for running instance found!").to.equal("Running AtlasMap instance found at port " + port);
 		});
 

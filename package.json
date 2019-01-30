@@ -39,7 +39,7 @@
 	"contributes": {
 		"commands": [
 			{
-				"command": "atlasmap.start",
+				"command": "atlasmap.startAndOpen",
 				"title": "Open AtlasMap",
 				"category": "AtlasMap"
 			}
@@ -47,7 +47,7 @@
 	},
 	"activationEvents": [
 		"onCommand:atlasmap.open",
-		"onCommand:atlasmap.start"
+		"onCommand:atlasmap.startAndOpen"
 	],
 	"scripts": {
 		"vscode:prepublish": "tsc -p ./",

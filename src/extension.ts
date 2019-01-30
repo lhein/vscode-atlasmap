@@ -13,7 +13,7 @@ export function activate(context: vscode.ExtensionContext) {
 	let atlasmapExecutablePath = context.asAbsolutePath(path.join('jars','atlasmap-standalone.jar'));
 	let atlasMapLaunchPort: string;
 
-	context.subscriptions.push(vscode.commands.registerCommand('atlasmap.start', async () => {
+	context.subscriptions.push(vscode.commands.registerCommand('atlasmap.startAndOpen', async () => {
 		if (atlasMapLaunchPort === undefined) {
 			const freeLocalPort = await retrieveFreeLocalPort();
 			launchAtlasMapLocally(atlasmapExecutablePath, atlasmapServerOutputChannel, freeLocalPort);
