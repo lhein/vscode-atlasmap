@@ -83,6 +83,14 @@ function isAtlasMapRunning(): boolean {
 
 function ensureNoOtherAtlasMapInstanceRunning(): Promise<boolean> {
 	return new Promise( async (resolve, reject) => {
+
+		const puppeteer = require('puppeteer');
+		const browser = await puppeteer.launch();
+		const page = await browser.newPage();
+		await page.goto('https://google.com');
+		await page.pdf({path: 'google.pdf'});
+		await browser.close();
+
 		if (isAtlasMapRunning()) {
 			// we need to stop a running atlasmap to make the next import work
 			let choice = await vscode.window.showWarningMessage(WARN_MSG, { modal: true }, RESTART_CHOICE);
